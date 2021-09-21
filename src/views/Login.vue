@@ -8,15 +8,15 @@
         <div class="card shadow bg-white rounded container">
           <form @submit.prevent="login">
             <p v-if="errors.length">
-    <b>Please correct the indicated errors</b>
-    <ul>
-      <li class="error-li" :v-for="errors">{{errors}}</li>
-    </ul>
-  </p>
+            <b>Please correct the indicated errors</b>
+              <ul>
+                <li class="error-li" :v-for="errors">{{errors}}</li>
+              </ul>
+            </p>
             <div class="row justify-content-center">
               <div class="col-8 mt-5">
                 <label class="input-label">Email:</label>
-                <input min="1" class="form-control form-control-sm" maxlength="35" type="email" name="username" v-model="username">
+                <input min="1" class="form-control form-control-sm" maxlength="35" name="username" v-model="username">
               </div>
             </div>
             <div class="row justify-content-center">
@@ -48,15 +48,18 @@ export default {
     }
   },
    methods: {
-      login: function () {
+      async login () {
         let username = this.username
         let password = this.password
         localStorage.setItem('username', username)
         localStorage.setItem('password', password)
-        this.$store.dispatch('login', { username, password })
+         await this.$store.dispatch('login', { username, password })
+        if(this.isAuthenticated = true){
+        this.$router.push({ path: '/main' })
+        }
         window.location.reload()
-        .then(() => this.$router.push({ name: 'Main' }))
-        
+        .then(() => this.$router.push({ path: '/main' }))
+        .catch(err => console.log(err))
       }, 
       checkForm: function (e) {
       if (this.username && this.password) {
@@ -68,13 +71,12 @@ export default {
         this.errors.push('A username is required.');
       }
       if (!this.password) {
-        this.errors.push('Password required.');
+        this.errors.push('Password is required.');
       }
 
       e.preventDefault();
-    }
-
-    }
+      }
+  }
 }
 </script>
 

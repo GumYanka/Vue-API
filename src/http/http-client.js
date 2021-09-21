@@ -2,8 +2,8 @@ import axios from "axios";
 import * as _ from "lodash";
 import { start, done } from "nprogress/nprogress";
 import { store } from "@/store/store";
-import { router } from "@/router/router";
-import * as names from "@/router/names";
+import { router } from "@/router/index";
+import * as names from "../constants";
 
 // let subscribers = [];
 // let tokenIsRefreshing = false;

@@ -15,8 +15,7 @@
             ></router-link>
           </li>
           <li v-if="isloged">
-            <a @click="logOut()"
-              >logout<ion-icon name="log-out-outline"></ion-icon
+            <a @click="logOut()"><router-link :to="{ name: 'Login' }">logout</router-link><ion-icon name="log-out-outline"></ion-icon
             ></a>
           </li>
         </ul>
@@ -36,23 +35,32 @@ export default {
   },
   mounted() {
     if (localStorage.getItem('password'))
-      (this.isloged = true), console.log(localStorage.getItem('password'));
+      (this.isloged = true), 
+      console.log(localStorage.getItem('password'));
       if (localStorage.getItem('username'))
-      (this.isAuthenticated = true),
-       console.log(localStorage.getItem('username'));
+      (this.isloged = true),
+      console.log(localStorage.getItem('username'));
   },
   methods: {
-    logOut() {
+    logOut: function() {
       localStorage.removeItem('password');
       localStorage.removeItem('username');
-      window.location.reload();
-      this.$router.push({ name: 'Login' });
+      window.location.reload()
+      .then(() => {
+          this.$router.go({ path: '/login' })
+      })
     },
   },
 };
 </script>
 
 <style>
+a {
+    color: #000000 !important;
+    text-decoration: none;
+    background-color: transparent;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -143,4 +151,5 @@ a:hover {
 #nav > ul > li > ul {
   display: none;
 }
+
 </style>
