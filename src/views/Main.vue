@@ -8,7 +8,7 @@
             <div class="card shadow bg-white rounded" v-for="card in cards" :key="card.id">
                 <div class="card-body justify-content-center">
                   <div>{{card.title}}</div>
-                   <img src="../assets\john-towner-JgOeRuGD_Y4-unsplash.jpg" style="max-width: 100%" alt="">
+                   <img src="..\assets\thomas-vimare-IZ01rjX0XQA-unsplash.jpg" style="max-width: 100%" alt="">
                   <p>TEXT</p>
                  <b-card-text>{{card.body}}</b-card-text>
                 </div>
